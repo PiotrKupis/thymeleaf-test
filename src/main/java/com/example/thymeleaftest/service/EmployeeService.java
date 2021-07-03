@@ -4,7 +4,6 @@ import com.example.thymeleaftest.model.Employee;
 import com.example.thymeleaftest.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,5 +23,14 @@ public class EmployeeService {
 
     public void saveEmployee(Employee employee) {
         employeeRepository.save(employee);
+    }
+
+    public Employee getEmployeeById(Long id) {
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee nou found with id " + id));
+    }
+
+    public void deleteEmployee(Long id) {
+        employeeRepository.deleteById(id);
     }
 }
